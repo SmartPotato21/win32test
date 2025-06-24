@@ -6,6 +6,10 @@
 #include "basic_constructor.h"
 #include <vector>
 
+#define RESOLUTION_X 720
+#define RESOLUTION_y 720
+
+
 HDC   ghDC = NULL;
 HGLRC ghRC = NULL;
 
@@ -77,7 +81,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             glViewport(0, 0, 800, 600); // Set viewport to window size
-            glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Set background color 
+            glClearColor(0.102f, 0.125f, 0.173f, 1.0f); // Set background color 
 
             break;
         }
@@ -139,7 +143,7 @@ HWND windowCreate(HINSTANCE hInstance, int nCmdShow) {
         CLASS_NAME,
         "OpenGL Rectangle",
         WS_OVERLAPPEDWINDOW | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
-        CW_USEDEFAULT, CW_USEDEFAULT, 1920, 1080,
+        CW_USEDEFAULT, CW_USEDEFAULT, RESOLUTION_X, RESOLUTION_y,
         nullptr, nullptr, hInstance, nullptr
     );
 
