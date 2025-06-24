@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include "basic_constructor.h"
+#include <vector>
 
 HDC   ghDC = NULL;
 HGLRC ghRC = NULL;
@@ -172,6 +173,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow) {
     MSG msg = {};
     bool running = true;
 
+    vector<Box> boxes;
     
 
     while (running) 
@@ -187,19 +189,28 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow) {
         }
 
         // UPDATE LOGIC
-        POINT pt;
-        GetCursorPos(&pt);
-        ScreenToClient(hwnd, &pt);
-        Box mybox(1);
-        mybox.posX = (float)pt.x;
-        mybox.posY = (float)pt.y;
+        if (GetAsyncKeyState(VK_LBUTTON) & 0x8000) {
+            POINT pt;
+            GetCursorPos(&pt);
+            ScreenToClient(hwnd, &pt);
+            Box mybox(1);
+            mybox.scale = 0.1f;
+            mybox.posX = (float)pt.x;
+            mybox.posY = (float)pt.y;
+            boxes.push_back(mybox);
+        }
 
         // RENDER
         glClear(GL_COLOR_BUFFER_BIT);
-        mybox.draw();             // <--- This is the dynamic render
+        //debugger(toString(objs.size()));
+        for(Box obj : boxes){
+            obj.draw();
+        }
+
+                     // <--- This is the dynamic render
         SwapBuffers(ghDC);
 
-        Sleep(16); // ~60 FPS
+        Sleep(8); // ~120 FPS
     }
 
     return (int)msg.wParam;

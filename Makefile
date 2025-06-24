@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wextra -std=c++17 -mwindows
+CXXFLAGS = -Wextra -static-libgcc -static-libstdc++ -std=c++17 -mwindows
 LDFLAGS = -luser32 -lgdi32 -lopengl32
 
 # Target executable
