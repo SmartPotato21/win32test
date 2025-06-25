@@ -1,13 +1,13 @@
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -Wextra -static-libgcc -static-libstdc++ -std=c++17 -mwindows
-LDFLAGS = -luser32 -lgdi32 -lopengl32
+LDFLAGS = -luser32 -lgdi32 -lopengl32 -Iinclude
 
 # Target executable
 TARGET = WinMain
 
 # Source files
-SRC = main.cpp basic_constructor.cpp
+SRC = main.cpp basic_constructor.cpp glad.c
 
 # Default target to build the executable
 all: $(TARGET)
